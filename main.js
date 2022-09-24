@@ -6,7 +6,7 @@ let duration = 1500;
 let val;
 let val1;
 
-let startTimerM = 4;
+let startTimerM = 4; 
 let time = startTimerM * 60;
 
 let startTimerM1 = 2;
@@ -35,8 +35,17 @@ function upDate(params) {
   seconds = seconds < 10 ? "0" + seconds : seconds;
   minuets = minuets < 10 ? "0" + minuets : minuets;
   counDownElement.innerHTML = `${minuets} : ${seconds}`;
-  time--;
+  if (time + 1 >= 0) { 
+    --time;
+  }
+  if (time + 1 === 0) { 
+    setTimeout(() => {
+      loser()
+    },1500);
+    clearInterval(val)
+  }
 }
+
 function upDate1(params) {
   let minuets = Math.floor(time1 / 60);
   let seconds = time1 % 60;
@@ -44,7 +53,61 @@ function upDate1(params) {
   minuets = minuets < 10 ? "0" + minuets : minuets;
   counDownElement.innerHTML = `${minuets} : ${seconds}`;
   time1--;
+  
 }
+
+function loser() {
+  loserDiv = document.createElement("div");
+  loserbtn = document.createElement("button");
+  teTcongDiv = document.createTextNode("I am sorry Loser");
+  teTloserbtn = document.createTextNode("Play again");
+  congDiv = document.createElement("div");
+  loserDiv.style.fontSize = "40px";
+  loserDiv.style.fontWeight = "bold";
+  loserDiv.style.backgroundColor = "#f6f6f6";
+  loserDiv.style.width = "700px";
+  loserDiv.style.height = "300px";
+  loserDiv.style.position = "fixed";
+  loserDiv.style.left = "50%";
+  loserDiv.style.top = "50%";
+  loserDiv.style.transform = "translate(-50%, -50%)";
+  loserDiv.style.padding = "50px 50px 20px";
+  loserDiv.style.borderRadius = "6px";
+  loserDiv.style.textAlign = "center";
+  loserbtn.style.cursor = "pointer";
+  loserbtn.style.position = "absolute";
+  loserbtn.style.left = "50%";
+  loserbtn.style.top = "70%";
+  loserbtn.style.transform = "translate(-50%, -50%)";
+  loserbtn.style.padding = "15px 20px";
+  loserbtn.style.borderRadius = "6px";
+  loserbtn.style.textAlign = "center";
+  loserbtn.style.fontSize = "25px";
+  loserbtn.style.backgroundColor = "#2196f3";
+  loserbtn.style.border = "none";
+  loserbtn.style.color = "#f6f6f6";
+  loserbtn.style.border = "none";
+  loserbtn.appendChild(teTloserbtn);
+  loserDiv.appendChild(loserbtn);
+  congDiv.appendChild(teTcongDiv);
+  loserDiv.appendChild(congDiv);
+  loserbtn.addEventListener("click", function () {
+    for (let i = 0; i < arrBlocks.length; i++) {
+      arrBlocks[i].classList.remove("rightBlock");
+    }
+    loserDiv.remove();
+    val1= setInterval(upDate1, 1000); 
+    triess.innerHTML = -1
+    triess.innerHTML = parseInt(triess.innerHTML) + 1;
+
+  });
+  document.body.appendChild(loserDiv); 
+} 
+
+
+
+
+
 let blocks = document.querySelector(".container-game-blocks");
 
 let arrBlocks = Array.from(blocks.children);
@@ -105,7 +168,6 @@ function cheacking(firstBlock, secondBlock) {
   setTimeout(() => {
     runwin();
   }, 1000);
-  clearInterval(val);
 }
 
 function shelf(ele) {
@@ -129,6 +191,7 @@ function shelf(ele) {
 function runwin() {
   if (arrBlocks.every(winner) === true) {
     winnerwinner();
+  clearInterval(val);
   }
 }
 
@@ -153,7 +216,7 @@ function winnerwinner() {
   winDiv.style.padding = "50px 50px 20px";
   winDiv.style.borderRadius = "6px";
   winDiv.style.textAlign = "center";
-  winDiv.style.cursor = "pointer";
+  winbtn.style.cursor = "pointer";
   winbtn.style.position = "absolute";
   winbtn.style.left = "50%";
   winbtn.style.top = "70%";
@@ -182,4 +245,3 @@ function winnerwinner() {
   });
   document.body.appendChild(winDiv);
 }
-console.log();
