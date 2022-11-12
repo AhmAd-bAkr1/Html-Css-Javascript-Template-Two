@@ -245,3 +245,42 @@ pointer-events: none;
   }
 
 }
+
+@media (max-width: 450px) {
+  .info-informations{
+    width: 250px;
+    font-size: 10px;
+    padding:5px 5px;
+  }
+  .info-informations .name {
+    min-width:35%;
+  }
+  .info-informations .tries {
+    min-width:35%;
+  }
+  .timer{
+    font-size: 12px;
+  }
+  .container-game-blocks{
+    width: 250px;
+  }
+
+  .container-game-blocks .container-game-block{
+    height: 40px;
+    flex: 1 0 40px ;
+    margin:0px 5px 10px ;
+  }
+  .container-game-blocks .container-game-block .front{
+    background-color: #333;
+    line-height: 35px;
+  }
+  .container-game-blocks .container-game-block .front::before{
+    font-size: 25px;
+  }
+  .container-game-blocks .container-game-block .back img {
+    width: 50px; 
+   height: 50px;
+   margin-top: 10px;
+  }
+
+}
