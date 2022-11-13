@@ -6,7 +6,7 @@ let duration = 1500;
 let val;
 let val1;
 
-let startTimerM = 4; 
+let startTimerM = 3; 
 let time = startTimerM * 60;
 
 let startTimerM1 = 2;
@@ -52,11 +52,65 @@ function upDate1(params) {
   seconds = seconds < 10 ? "0" + seconds : seconds;
   minuets = minuets < 10 ? "0" + minuets : minuets;
   counDownElement.innerHTML = `${minuets} : ${seconds}`;
-  time1--;
-  
+
+  if (time1 + 1 >= 0) { 
+    --time1;
+  }
+  if (time1 + 1 === 0) { 
+    l()
+    clearInterval(val1)
+  }
 }
 
+function l(params) { loserDiv = document.createElement("div");
+loserbtn = document.createElement("button");
+teTcongDiv = document.createTextNode("I am sorry Loser");
+teTloserbtn = document.createTextNode("Play again");
+congDiv = document.createElement("div");
+loserDiv.style.fontSize = "40px";
+loserDiv.style.fontWeight = "bold";
+loserDiv.style.backgroundColor = "#f6f6f6";
+loserDiv.style.width = "700px";
+loserDiv.style.height = "300px";
+loserDiv.style.position = "fixed";
+loserDiv.style.left = "50%";
+loserDiv.style.top = "50%";
+loserDiv.style.transform = "translate(-50%, -50%)";
+loserDiv.style.padding = "50px 50px 20px";
+loserDiv.style.borderRadius = "6px";
+loserDiv.style.textAlign = "center";
+loserbtn.style.cursor = "pointer";
+loserbtn.style.position = "absolute";
+loserbtn.style.left = "50%";
+loserbtn.style.top = "70%";
+loserbtn.style.transform = "translate(-50%, -50%)";
+loserbtn.style.padding = "15px 20px";
+loserbtn.style.borderRadius = "6px";
+loserbtn.style.textAlign = "center";
+loserbtn.style.fontSize = "25px";
+loserbtn.style.backgroundColor = "#2196f3";
+loserbtn.style.border = "none";
+loserbtn.style.color = "#f6f6f6";
+loserbtn.style.border = "none";
+loserbtn.appendChild(teTloserbtn);
+loserDiv.appendChild(loserbtn);
+congDiv.appendChild(teTcongDiv);
+loserDiv.appendChild(congDiv);
+loserbtn.addEventListener("click", function () {
+  startTimerM1 = 1
+  time1 = 60
+  console.log(time1)
+  val1= setInterval(upDate1, 1000);
+  loserDiv.remove(); 
+  triess.innerHTML = -1
+  triess.innerHTML = parseInt(triess.innerHTML) + 1;
+
+});
+document.body.appendChild(loserDiv); 
+
+}
 function loser() {
+  
   loserDiv = document.createElement("div");
   loserbtn = document.createElement("button");
   teTcongDiv = document.createTextNode("I am sorry Loser");
